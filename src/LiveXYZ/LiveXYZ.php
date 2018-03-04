@@ -85,10 +85,19 @@ class LiveXYZ extends PluginBase implements Listener
             if (!isset($this->tasks[$sender->getName()])) {
                 /** @var TaskHandler */
                 $this->tasks[$sender->getName()] = $sender->getServer()->getScheduler()->scheduleRepeatingTask(new ShowDisplayTask($this, $sender, $this->mode), $this->refreshRate);
-                $sender->sendMessage(TextFormat::GREEN . "LiveXYZ is now on!");
+                #$sender->sendMessage(TextFormat::GREEN . "LiveXYZ is now on!");
+                $sender->sendMessage(TextFormat::GREEN . LocalizationService::translate(
+                        $sender->getLocale(),
+                        'LiveXYZ',
+                        'livexyz.on'
+                    ));
             } else {
                 $this->stopDisplay($sender->getName());
-                $sender->sendMessage(TextFormat::GREEN . "LiveXYZ is now off.");
+                $sender->sendMessage(TextFormat::GREEN . LocalizationService::translate(
+                        $sender->getLocale(),
+                        'LiveXYZ',
+                        'livexyz.off'
+                    ));
             }
 
             return true;
